@@ -25,7 +25,7 @@ client.on('message', (message) =>{
     if (message.content.startsWith(PREFIX+'weather')){
 
         console.log(`[${message.author.tag}]: ${message.content}`)
-        const query = message.content.trim().substring(PREFIX.length).split(/\s+/)[1]
+        const query = message.content.trim().substring(PREFIX.length).replace('weather','').trim();
         console.log(query);
 
         if (query === undefined){
