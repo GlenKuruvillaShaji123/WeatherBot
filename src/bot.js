@@ -29,7 +29,7 @@ client.on('message', (message) =>{
         console.log(query);
 
         if (query === undefined){
-            message.reply('Invalid query. Send the command along with a space between the query location.')
+            message.reply('Invalid query. Send the prefix along with a space in between the query location.')
 
         }else{
             const url = 'https://api.openweathermap.org/data/2.5/weather?q='+query+'&appid='+apiKey+'&units='+unit;
@@ -55,14 +55,10 @@ client.on('message', (message) =>{
                     } 
 
                     const imageURL = 'http://openweathermap.org/img/wn/'+iconID+'@2x.png'
-                    let areaLoc = weatherData.name.toLowerCase().split(' ');
-                    for (var i = 0; i < areaLoc.length; i++) { 
-                        areaLoc[i] = areaLoc[i].charAt(0).toUpperCase() + areaLoc[i].slice(1);  
-                    } 
-                    console.log(areaLoc)
+                    const areaLoc = weatherData.name;
                     const country = weatherData.sys.country
 
-                    message.channel.send(`Query: ${areaLoc+', '+country} \nTemperature: ${temp}°C, \nWeather Description: ${weatherDesc.join(' ')}
+                    message.reply(`Query: ${areaLoc+', '+country} \nTemperature: ${temp}°C, \nWeather Description: ${weatherDesc.join(' ')}
                                     \n`,{files: [imageURL]});
                     });
                 }
